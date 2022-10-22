@@ -63,17 +63,17 @@ public class Mouse{
 
   public void setTipo(string tipo){
         tipo = tipo.ToUpper();
-        if (tipo.Equals("MECANICO") || tipo.Equals("OPTICO") || tipo.Equals("LASER")){
+        if (tipo.Equals("NORMALES") || tipo.Equals("ERGONOMICO")){
             this.tipo = tipo;
         } else {
             do{
             Console.WriteLine("Error. Tipo Invalido.");
-            Console.WriteLine("Tipos permitidos: MECANICO, OPTICO, LASER.");
+            Console.WriteLine("Tipos permitidos: NORMAL, ERGONOMIC0.");
             Console.Write("Debe corregir el Tipo: " );
             tipo = Console.ReadLine();
             tipo = tipo.ToUpper();
             this.tipo = tipo;
-            }while(this.tipo != "MECANICO" && this.tipo != "OPTICO" && this.tipo != "LASER");
+            }while(this.tipo != "NORMAL" && this.tipo != "ERGONOMICO");
         }
     }
 
@@ -93,8 +93,16 @@ public class Mouse{
         }
     }
 
-    public void setErgonomico(bool ergonomico){
-        this.ergonomico = ergonomico;
+    public void setErgonomico(bool ergonomico, string tipo){
+        this.tipo = tipo;
+        if (this.tipo.Equals("ERGONOMICO")){
+            ergonomico = true;
+            this.ergonomico = ergonomico;
+        }
+        else{
+            ergonomico = false;
+            this.ergonomico = ergonomico;
+        }
     }
 
    public void setPrecio(float precio){
@@ -127,9 +135,9 @@ public class MouseTest{
         Mouse raton1 = new Mouse();
         raton1.setMarca("dell");
         raton1.setModelo("1n7054");
-        raton1.setTipo("optico");
+        raton1.setTipo("normal");
         raton1.setColor("verde");
-        raton1.setErgonomico(true);
+        raton1.setErgonomico(false, raton1.getTipo());
         raton1.setPrecio(50);
         //raton1.setPrecio();
         //raton1.getColor();

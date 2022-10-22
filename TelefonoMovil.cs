@@ -90,6 +90,8 @@ encapsular la clase TelefonoMovil.
             }while(this.estado != "ENCENDIDO" && this.estado != "SUSPENDIDO" && this.estado != "APAGADO");
         }
     }
+    //con el siguiente metodo agregamos la capacidad de la bateria.
+    //la bateria tendra una capacidad no mayor a 10K mili amperes y no menor a 3500 miliamperes. 
     public void setBateria(int bateria){
         this.bateria = bateria;
         while(this.bateria > 10000 || this.bateria < 3500){
@@ -119,6 +121,6 @@ class TelefonoMovilTest{
         Console.WriteLine("Cantidad Camaras:        " + miCelular.getCantidadCamaras());
         Console.WriteLine("Tamaño:                  " + miCelular.getSize());
         Console.WriteLine("Estado:                  " + miCelular.getEstado()); 
-        Console.WriteLine("Capacidad de la Bateria: " + miCelular.getBateria() + " Mili Amperes.");    
+        Console.WriteLine("Capacidad de la Bateria: " + miCelular.getBateria() + " Mili Amperes.");//obteniedo el estado de la nueva caracteristica.   
     }
 }

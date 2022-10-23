@@ -45,14 +45,17 @@ public class Mouse{
         if (marca.Equals("DELL") || marca.Equals("GENIUS") || marca.Equals("LOGITEC")){
             this.marca = marca;
         } else {
-            do{
+            //do{
             Console.WriteLine("Error. Marca Invalida.");
             Console.WriteLine("Marcas permitidas: DELL, GENIUS, LOGITEC.");
-            Console.Write("Debe corregir la marca: " );
-            marca = Console.ReadLine();
+            //Console.Write("Debe corregir la marca: " );
+            //marca = Console.ReadLine();
             marca = marca.ToUpper();
             this.marca = marca;
-            }while(this.marca != "DELL" && this.marca != "GENIUS" && this.marca != "LOGITEC");
+            if(this.marca != "DELL" && this.marca != "GENIUS" && this.marca != "LOGITEC"){
+                this.marca = "Generic Device";
+            }
+            //}while(this.marca != "DELL" && this.marca != "GENIUS" && this.marca != "LOGITEC");
         }
     }
 
@@ -117,6 +120,7 @@ public class Mouse{
 
    
     public void desplegarInformacion(){
+        Console.WriteLine("\n\n");
         Console.WriteLine("Marca: " + getMarca());
         Console.WriteLine("Modelo: " + getModelo());
         Console.WriteLine("Tipo: " + getTipo());
@@ -133,7 +137,7 @@ public class Mouse{
 public class MouseTest{
     static void Main(){
         Mouse raton1 = new Mouse();
-        raton1.setMarca("dell");
+        raton1.setMarca("toshiba");
         raton1.setModelo("1n7054");
         raton1.setTipo("normal");
         raton1.setColor("verde");

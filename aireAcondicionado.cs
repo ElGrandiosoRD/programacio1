@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 class AireAcondicionado{
     //variables
-    private string marca = "xxx";
+    private string marca;
     private int temperatura;
     private byte vFan;
     private bool prendido;
@@ -16,12 +16,18 @@ class AireAcondicionado{
     }
     //metodos
     public void encender(){
-        if (prendido){Console.WriteLine("Ya estaba encendido.");}
+        if (prendido){
+            Console.WriteLine("Ya estaba encendido.");
+            Task.Delay(1000).Wait();}
         else {
             prendido = true;
             vFan = 1;
             temperatura = 17;
-            Console.WriteLine("Encendiendo...");
+            Console.Write("Encendiendo");
+            for(int i=0; i<3; ++i){
+            Task.Delay(1000).Wait(); 
+            Console.Write(".");
+            }
         }
     }
     public void apagar(){
@@ -36,58 +42,82 @@ class AireAcondicionado{
             }
             Console.WriteLine();
         }
-        else {Console.WriteLine("Ya estaba apagado");}
+        else {
+            Console.WriteLine("Ya estaba apagado");
+            Task.Delay(1000).Wait();
+            }
     }
     public void subirTemperatura(){
         //-	Decrementa en 1, el valor de la temperatura.
-        if (temperatura == 17){Console.WriteLine("Temperatura minima alcanzada." + temperatura + " C");}
-        else {
-            --temperatura;
-            Console.WriteLine("Temperatura: " + temperatura + " C"); 
+        if(prendido){
+            if (temperatura == 17){
+                Console.WriteLine("Temperatura minima alcanzada. " + temperatura + " C");
+                Task.Delay(1000).Wait();}
+            else {
+                --temperatura;
+                //Console.WriteLine("Temperatura: " + temperatura + " C"); 
+            }
         }
+        else{
+            Console.WriteLine("Debes encenderlo para poder modificar la temperatura");
+            Task.Delay(1000).Wait();} 
     }
     public void bajarTemperatura(){
         //-	Incrementa en 1, el valor de la temperatura.
-        if (temperatura == 26){Console.WriteLine("Temperatura maxima alcanzada." + temperatura + " C");}
-        else {
-            ++temperatura;
-            Console.WriteLine("Temperatura: " + temperatura + " C"); 
+        if(prendido){
+            if (temperatura == 26){
+                Console.WriteLine("Temperatura maxima alcanzada. " + temperatura + " C");
+                Task.Delay(1000).Wait();}
+            else {
+                ++temperatura;
+                //Console.WriteLine("Temperatura: " + temperatura + " C"); 
+            }
         }
+        else{
+            Console.WriteLine("Debes encenderlo para poder modificar la temperatura");
+            Task.Delay(1000).Wait();} 
     }
     public void subirVelocidadDelFan(){
         //-	El abanico del aire tiene solo cuatro velocidades. 
         //Este método incrementa en 1 la velocidad del abanico.
         if(prendido){
-            if(prendido){
-                 if (vFan == 4){Console.WriteLine("El abanico ya esta al maximo.");}
-                 else {
-                    ++vFan;
-                    Console.WriteLine("Velocidad abanico: " + vFan);
-                }
+            if (vFan == 4){
+                Console.WriteLine("El abanico ya esta al maximo.");
+                Task.Delay(1000).Wait();}
+            else {
+                ++vFan;
+                //Console.WriteLine("Velocidad abanico: " + vFan);
             }
-        else{Console.WriteLine("Debes encenderlo para poder modificar la velocidad del abanico.");}
-        }       
+        } 
+        else{
+            Console.WriteLine("Debes encenderlo para poder modificar la velocidad del abanico.");
+            Task.Delay(1000).Wait();}      
     }
     public void bajarVelocidadDelFan(){
         //-	El abanico del aire tiene solo cuatro velocidades.
         // Este método decrementa en 1 la velocidad del abanico.
         if(prendido){
-            if (vFan == 0){Console.WriteLine("El abanico ya esta al minimo.");}
+            if (vFan == 1){
+                Console.WriteLine("El abanico ya esta al minimo.");
+                Task.Delay(1000).Wait();}
             else {
                 --vFan;
-                Console.WriteLine("Velocidad abanico: " + vFan);
+                //Console.WriteLine("Velocidad abanico: " + vFan);
             }
         }
-        else{Console.WriteLine("Debes encenderlo para poder modificar la velocidad del abanico.");}
+        else{
+            Console.WriteLine("Debes encenderlo para poder modificar la velocidad del abanico.");
+            Task.Delay(1000).Wait();}
     }
     public void verEstado(){
         Console.Clear();
         Console.WriteLine("Marca: " + marca);
-        Console.WriteLine("Encendido: " + prendido);
+        if(prendido){Console.WriteLine("Encendido: " + prendido);}
+            else{Console.WriteLine("Encendido: stand-by");}
         if(prendido == false){Console.WriteLine("Temperatura: null");}
-        else {Console.WriteLine("Temperatura: " + temperatura + " C");}
+            else {Console.WriteLine("Temperatura: " + temperatura + " C");}
         if (prendido == false){Console.WriteLine("Abanico: null");}
-        else {Console.WriteLine("Abanico: " + vFan);}
+            else {Console.WriteLine("Abanico: " + vFan);}
     }
      
 }
@@ -105,7 +135,20 @@ class tester{
         + "2) HAIER.\n"
         + "3) NEDOCA.\n"
         + "=>");
-    }    
+    }   
+    static void menu2(){
+        Console.Write(
+            "Opciones.\n"
+            + "1) Encender.\n"
+            + "2) Apagar.\n"
+            + "3) Subir Temperatura.\n"
+            + "4) Bajar Temperatura. \n"
+            + "5) Subir velocidad del abanico.\n"
+            + "6) Bajar velocidad del abanico.\n"
+            + "0) Salir.\n" 
+            + "=>"
+        );
+    } 
         
    
     static void Main(){
@@ -129,24 +172,64 @@ class tester{
             
         
         }while(eleccion != 1 && eleccion != 2 && eleccion != 3);
-        if (eleccion == 1){marca = "SAMSUNG"; }
-        else if(eleccion == 2) {marca = "HAIER"; }
-        else if(eleccion == 3) {marca = "NEDOCA";}
+        switch(eleccion)
+        {
+            case 1:
+                marca = "SAMSUNG";
+                break;
+            case 2:
+                marca = "HAIER";
+                break;
+            case 3:
+                marca = "NEDOCA";
+                break;
+        }
 
         AireAcondicionado mio = new AireAcondicionado(marca);
+        
+        do{
+           
+            do{
+                mio.verEstado();
+                Console.WriteLine("**************");
+                menu2();
+                elegir = Console.ReadLine();
+                prueba = int.TryParse(elegir, out eleccion);
+                if(eleccion > 6 || eleccion < 0){
+                    Console.Clear();
+                    Console.WriteLine("Opciones del 0 al 6.");
+                    Task.Delay(2000).Wait();
+                }
+            
+                if(prueba == false){
+                    Console.WriteLine("Solo numeros.");
+                    Task.Delay(2000).Wait();
+                    }
+            }while(prueba == false || eleccion > 6 || eleccion < 0);
+            switch (eleccion)
+            {
+               case 1:
+                    mio.encender();
+                    break;
+               case 2:
+                    mio.apagar();
+                    break;
+                case 3:
+                    mio.subirTemperatura();
+                    break;
+                case 4:
+                    mio.bajarTemperatura();
+                    break;
+                case 5:
+                    mio.subirVelocidadDelFan();
+                    break;
+                case 6:
+                    mio.bajarVelocidadDelFan();
+                    break;
+            }
 
+        }while(eleccion != 0);
         mio.verEstado();
-        Console.WriteLine("*********");
-        mio.encender();
-                Console.WriteLine("*********");
-        mio.verEstado();
-        Console.WriteLine("*********");
-        mio.apagar();
-         Console.WriteLine("*********");
-        mio.verEstado();
-                Console.WriteLine("*********");
-        mio.apagar();
-                Console.WriteLine("*********");
-        mio.verEstado();
+        
     }
 }

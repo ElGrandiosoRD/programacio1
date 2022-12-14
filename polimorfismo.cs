@@ -5,7 +5,7 @@ abstract class Animal{
     protected Animal(int legs) { this.legs = legs; }//constructor
     //metodos
     public virtual void walk() { Console.WriteLine("El animal esta caminando."); }
-    public virtual void eat() { Console.WriteLine("El animal esta comiendo."); } 
+    public abstract void eat();
 }//fin de clase animal.
 interface IPet{
     string getName();
@@ -16,7 +16,7 @@ class spider: Animal{
 
     public spider(): base(8){}//constructor
     //public override void walk(){Console.WriteLine("La araña esta caminando, con sus " + legs + " patas.");}
-    public override void eat () { Console.WriteLine("La araña se come un mosquito."); }//metodo
+    public override void eat (){ Console.WriteLine("La araña se come un mosquito."); }//metodo
 
 }//fin de la clase spider.
 class cat: Animal, IPet{

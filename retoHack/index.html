@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renacimiento de Nuestra Empresa</title>
+    <link rel="icon" type="image/x-icon" href="imagenes/favicon.png">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body class="body2">
+    <div class="container">
+        <!-- Contenedor de error inicial -->
+        <div class="error-container" id="error-container">
+            <div id="error" class="error-message">Error al cargar la página. ¡Estamos trabajando en ello!</div>
+            <button id="retry-button" onclick="recoverPage()">Reintentar</button>
+        </div>
+
+        <!-- Página de aterrizaje después de la "resurrección" -->
+        <div id="landing" class="landing-content">
+            <h1>¡Bienvenido a la Nueva Era de TALLERES PATY!</h1>
+            <p>Hemos resurgido con una visión renovada, más fuerte, más segura y más centrada en ti.</p>
+            <p>Después de un período de reinvención, ahora tenemos nuevos productos.</p>
+            <p>Revisa nuestra pagina de novedades para saber mas.</p> 
+            <button onclick="window.location.href='empresa.html'">Explora nuestra nueva web</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script> <!-- Vinculamos el archivo JavaScript -->
+</body>
+</html>
